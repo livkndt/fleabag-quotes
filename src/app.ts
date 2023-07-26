@@ -1,9 +1,8 @@
-import express from 'express';
+import express, { Express, Request, Response } from 'express';
 
-const app = express();
-const port = process.env.port || 3000;
+const app: Express = express();
 
-app.get('/quotes/random', (req, res) => {
+app.get('/quotes/random', (req: Request, res: Response) => {
   res.json("I'm not a bad guy. I just have a bad personality.");
 });
 
