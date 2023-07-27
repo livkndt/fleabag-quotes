@@ -1,7 +1,7 @@
 {
   "name": "fleabag-quotes",
   "version": "1.0.0",
-  "description": "Fleabag quotes API",
+  "description": "Fleabag quotes API. Get random quotes from Phoebe Waller-Bridge's Fleabag.",
   "repository": {
     "type": "git",
     "url": "https://github.com/livkndt/fleabag-quotes"
@@ -23,7 +23,11 @@
   "lint-staged": {
     "*.{js,ts,tsx,json,css,md}": "prettier --write"
   },
-  "keywords": [],
+  "keywords": [
+    "fleabag",
+    "quotes",
+    "phoebe waller-bridge"
+  ],
   "author": "Olivia Knoedt",
   "license": "MIT",
   "dependencies": {
