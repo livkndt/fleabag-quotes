@@ -5,7 +5,15 @@
 Fleabag quotes API. Cheeky little REST API built on Node.js and Express using TypeScript.
 Designed to return random quotes from the critically acclaimed TV series, "Fleabag", for your amusement.
 
+## Demo
+
+### API on Heroku
+
 https://fleabag-quotes-6072411c0ec5.herokuapp.com/quotes/random
+
+### Random inspirational quote image
+
+<img src="https://fleabag-quotes-6072411c0ec5.herokuapp.com/quotes/random/inspirational" alt="inspirational quote" width="400" />
 
 ## API Usage
 
