@@ -2,6 +2,23 @@ import request from 'supertest';
 import app from './app';
 import { quotes } from './quotes';
 
+describe('GET /quotes/:id', () => {
+  it('should respond with a quote given a quote id', async () => {
+    const response = await request(app).get('/quotes/6');
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual({
+      id: 6,
+      character: 'Boo',
+      quote: "As long as I can wear it or eat it, I'm happy.",
+    });
+  });
+  it('should respond with a 404 NotFound if quote is not found', async () => {
+    const response = await request(app).get('/quotes/1000');
+    expect(response.status).toBe(404);
+    expect(response.body.message).toBe('No quote found with id: 1000.');
+  });
+});
+
 describe('GET /quotes/characters', () => {
   it('should respond with a list of characters', async () => {
     const response = await request(app).get('/quotes/characters');
@@ -40,27 +57,31 @@ describe('GET /quotes/random', () => {
   });
 });
 
-describe('GET /quotes/:character', () => {
+describe('GET /quotes/characters/:character', () => {
   it('should respond with quotes for a specific character', async () => {
-    const response = await request(app).get('/quotes/Fleabag');
+    const response = await request(app).get('/quotes/characters/Fleabag');
     expect(response.status).toBe(200);
     expect(response.body).toHaveLength(21);
     expect(response.body).toContain('Hair is everything.');
   });
   it('should respond with a 404 NotFound if character is not found', async () => {
-    const response = await request(app).get('/quotes/NotACharacter');
+    const response = await request(app).get('/quotes/characters/NotACharacter');
     expect(response.status).toBe(404);
     expect(response.body.message).toBe('No quotes found for "NotACharacter".');
   });
 });
 
-describe('GET /quotes/:character/random', () => {
+describe('GET /quotes/characters/:character/random', () => {
   it('should respond with a random quote from a specific character', async () => {
-    const response = await request(app).get('/quotes/Fleabag/random');
+    const response = await request(app).get(
+      '/quotes/characters/Fleabag/random',
+    );
     expect(quotes.some((quote) => quote.quote === response.body)).toBe(true);
   });
   it('should respond with a 404 NotFound if character is not found', async () => {
-    const response = await request(app).get('/quotes/NotACharacter/random');
+    const response = await request(app).get(
+      '/quotes/characters/NotACharacter/random',
+    );
     expect(response.status).toBe(404);
     expect(response.body.message).toBe('No quotes found for "NotACharacter".');
   });
