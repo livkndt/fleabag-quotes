@@ -12,9 +12,12 @@ https://fleabag-quotes-6072411c0ec5.herokuapp.com/quotes/random
 The API includes several endpoints to interact with:
 
 - `GET /quotes/random`: Returns a random quote from any character in the show.
-- `GET /quotes/:character`: Returns all the quotes from a specific character.
-- `GET /quotes/random/:character`: Returns a random quote from a specific character.
 - `GET /quotes/characters`: Returns a list of all the characters who have quotes available.
+- `GET /quotes/random/inspirational`: Returns a random quote from any character in the show as an inspirational 400x400 png image.
+- `GET /quotes/:id`: Returns a quote from the show by numeric quote id.
+- `GET /quotes/:id/inspirational`: Returns a quote from the show by numeric quote id as an inspirational 400x400 png image.
+- `GET /quotes/characters/:character`: Returns all the quotes from a specific character.
+- `GET /quotes/characters/:character/random`: Returns a random quote from a specific character.
 
 ## Development
 

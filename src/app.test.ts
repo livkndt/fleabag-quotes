@@ -86,3 +86,11 @@ describe('GET /quotes/characters/:character/random', () => {
     expect(response.body.message).toBe('No quotes found for "NotACharacter".');
   });
 });
+
+describe('GET /quotes/random/inspirational', () => {
+  it('should respond with a random quote image', async () => {
+    const response = await request(app).get('/quotes/random/inspirational');
+    expect(response.statusCode).toBe(200);
+    expect(response.headers['content-type']).toBe('image/png');
+  });
+});

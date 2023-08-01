@@ -1,5 +1,6 @@
 import express, { Express, Request, Response } from 'express';
 import { Quote, getQuotes, quotes } from './quotes';
+import { generateQuoteImage } from './imageGenerator';
 
 const app: Express = express();
 
@@ -18,6 +19,14 @@ app.get('/quotes/characters', (req: Request, res: Response) => {
   res.json(characters);
 });
 
+app.get('/quotes/random/inspirational', (req: Request, res: Response) => {
+  const quote = quotes[Math.floor(Math.random() * quotes.length)];
+  const img: Buffer = generateQuoteImage(quote);
+
+  res.contentType('image/png');
+  res.send(img);
+});
+
 app.get('/quotes/:id', (req: Request, res: Response) => {
   const { id } = req.params;
   const quote = quotes.find((quote: Quote) => quote.id === Number(id));
@@ -26,6 +35,18 @@ app.get('/quotes/:id', (req: Request, res: Response) => {
     return;
   }
   res.json(quote);
+});
+
+app.get('/quotes/:id/inspirational', (req: Request, res: Response) => {
+  const { id } = req.params;
+  const quote = quotes.find((quote: Quote) => quote.id === Number(id));
+  if (!quote) {
+    res.status(404).json({ message: `No quote found with id: ${id}.` });
+    return;
+  }
+  const img: Buffer = generateQuoteImage(quote);
+  res.contentType('image/png');
+  res.send(img);
 });
 
 app.get('/quotes/characters/:character', (req: Request, res: Response) => {
