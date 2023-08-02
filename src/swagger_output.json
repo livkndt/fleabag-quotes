@@ -1,0 +1,189 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Fleabag API",
+    "description": "Fleabag quotes API. Get random quotes from Phoebe Waller-Bridge's Fleabag.",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": ["https", "http"],
+  "produces": ["application/json", "image/png"],
+  "paths": {
+    "/quotes/random": {
+      "get": {
+        "tags": ["Quotes"],
+        "description": "Get a random quote from the show.",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Quote"
+            }
+          }
+        }
+      }
+    },
+    "/quotes/characters": {
+      "get": {
+        "tags": ["Quotes"],
+        "description": "Returns a list of all the characters who have quotes available.",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/quotes/random/inspirational": {
+      "get": {
+        "tags": ["Quotes"],
+        "description": "Returns a random quote from any character in the show as an inspirational 400x400 png image.",
+        "produces": ["image/png"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/quotes/{id}": {
+      "get": {
+        "tags": ["Quotes"],
+        "description": "Returns a quote from the show by numeric quote id.",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Quote ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Quote"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/quotes/{id}/inspirational": {
+      "get": {
+        "tags": ["Quotes"],
+        "description": "Returns a quote from the show by numeric quote id as an inspirational 400x400 png image.",
+        "produces": ["image/png"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Quote ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/quotes/characters/{character}": {
+      "get": {
+        "tags": ["Quotes"],
+        "description": "Returns all the quotes from a specific character.",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "character",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Character name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "array"
+                },
+                "items": {
+                  "$ref": "#/definitions/Quote"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/quotes/characters/{character}/random": {
+      "get": {
+        "tags": ["Quotes"],
+        "description": "Returns a random quote from a specific character.",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "character",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Character name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Quote"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Quote": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": 1
+        },
+        "character": {
+          "type": "string",
+          "example": "Fleabag"
+        },
+        "quote": {
+          "type": "string",
+          "example": "Hair is everything."
+        }
+      }
+    }
+  }
+}

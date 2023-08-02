@@ -1,5 +1,7 @@
 import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './swagger_output.json';
 import app from './app';
 
 const port: string | number = process.env.PORT || 3000;
@@ -13,6 +15,8 @@ const limiter = rateLimit({
 app.use(limiter);
 
 app.use(helmet());
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);
