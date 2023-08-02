@@ -1,6 +1,6 @@
 {
   "name": "fleabag-quotes",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Fleabag quotes API. Get random quotes from Phoebe Waller-Bridge's Fleabag.",
   "repository": {
     "type": "git",

@@ -42,6 +42,29 @@
         "tags": ["Quotes"],
         "description": "Returns a random quote from any character in the show as an inspirational 400x400 png image.",
         "produces": ["image/png"],
+        "parameters": [
+          {
+            "name": "imageWidth",
+            "in": "query",
+            "description": "Width of image in pixels (max 2400)",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "imageHeight",
+            "in": "query",
+            "description": "Height of image in pixels (max 3000)",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "fontSize",
+            "in": "query",
+            "description": "Font size of the quote text (max 96)",
+            "required": false,
+            "type": "integer"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -88,6 +111,27 @@
             "required": true,
             "type": "string",
             "description": "Quote ID"
+          },
+          {
+            "name": "imageWidth",
+            "in": "query",
+            "description": "Width of image in pixels (max 2400)",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "imageHeight",
+            "in": "query",
+            "description": "Height of image in pixels (max 3000)",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "fontSize",
+            "in": "query",
+            "description": "Font size of the quote text (max 96)",
+            "required": false,
+            "type": "integer"
           }
         ],
         "responses": {

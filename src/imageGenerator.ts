@@ -29,6 +29,7 @@ const drawCenteredQuote = (
   fontColor: string,
   quote: Quote,
   maxWidth: number,
+  fontSize: number = 24,
 ) => {
   // Set styling
   context.textBaseline = 'middle';
@@ -40,13 +41,13 @@ const drawCenteredQuote = (
   const centerX: number = context.canvas.width / 2;
   const centerY: number = context.canvas.height / 2;
 
-  let fontSize: number = 24;
-  let lineHeight: number = 32;
+  let lineFontSize: number = fontSize;
+  let lineHeight: number = fontSize * 1.5;
   let lines: string[] = [];
 
   // Chunk text into lines that fit the canvas width & return height of all lines
   const splitIntoLines = (text: string): number => {
-    context.font = `${fontSize}px "LibreBaskervilleRegular", serif`;
+    context.font = `${lineFontSize}px "LibreBaskervilleRegular", serif`;
     const words: string[] = text.split(' ');
     let line: string = '';
     lines = [];
@@ -69,9 +70,9 @@ const drawCenteredQuote = (
     return lineHeight * lines.length;
   };
 
-  while (splitIntoLines(quoteText) >= context.canvas.height - 40) {
+  while (splitIntoLines(quoteText) >= context.canvas.height - fontSize * 3) {
     // Reduce font size & line height if text is larger than canvas height (+ padding)
-    fontSize -= 2;
+    lineFontSize -= 2;
     lineHeight -= 2;
   }
 
@@ -89,10 +90,10 @@ const drawCenteredQuote = (
   }
 
   // Draw the last line (character) in italics
-  context.font = `${fontSize}px Tahoma, serif`;
+  context.font = `${lineFontSize}px Tahoma, serif`;
   drawLine(lines[lines.length - 2]);
   drawY += lineHeight * 1.5;
-  context.font = `${fontSize}px "LibreBaskervilleItalic", serif`;
+  context.font = `${lineFontSize}px "LibreBaskervilleItalic", serif`;
   drawLine(lines[lines.length - 1]);
 };
 
@@ -126,10 +127,13 @@ const drawRandomBackground = (
   context.fillRect(0, 0, canvasWidth, canvasHeight);
 };
 
-export const generateQuoteImage = (quote: Quote): Buffer => {
-  const imageWidth: number = 400;
-  const imageHeight: number = 400;
-  const quoteMaxWidth: number = 360;
+export const generateQuoteImage = (
+  quote: Quote,
+  imageWidth: number = 400,
+  imageHeight: number = 400,
+  fontSize: number = 24,
+): Buffer => {
+  const quoteMaxWidth: number = imageWidth - imageWidth * 0.2; // 10% padding on each side
   const fontColor: string = '#000';
 
   const canvas: Canvas = createCanvas(imageWidth, imageHeight);
@@ -139,7 +143,7 @@ export const generateQuoteImage = (quote: Quote): Buffer => {
   drawRandomBackground(context, imageWidth, imageHeight);
 
   context.globalAlpha = 1;
-  drawCenteredQuote(context, fontColor, quote, quoteMaxWidth);
+  drawCenteredQuote(context, fontColor, quote, quoteMaxWidth, fontSize);
 
   return canvas.toBuffer();
 };

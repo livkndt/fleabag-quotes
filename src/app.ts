@@ -8,6 +8,40 @@ const characterNotFound = (character: string, res: Response) => {
   res.status(404).json({ message: `No quotes found for "${character}".` });
 };
 
+const getQuoteImage = (req: Request, quote: Quote): Buffer => {
+  /*
+    #swagger.parameters['imageWidth'] = {
+        in: 'query',
+        description: 'Width of image in pixels (max 2400)',
+        required: false,
+        type: 'integer'
+    }
+    #swagger.parameters['imageHeight'] = {
+        in: 'query',
+        description: 'Height of image in pixels (max 3000)',
+        required: false,
+        type: 'integer'
+    }
+    #swagger.parameters['fontSize'] = {
+        in: 'query',
+        description: 'Font size of the quote text (max 96)',
+        required: false,
+        type: 'integer'
+    }
+  */
+  const imageWidth: number = req.query.imageWidth
+    ? Math.min(Number(req.query.imageWidth), 2400)
+    : 400;
+  const imageHeight: number = req.query.imageHeight
+    ? Math.min(Number(req.query.imageHeight), 3000)
+    : 400;
+  const fontSize: number = req.query.fontSize
+    ? Math.min(Number(req.query.fontSize), 96)
+    : 24;
+
+  return generateQuoteImage(quote, imageWidth, imageHeight, fontSize);
+};
+
 app.get('/quotes/random', (req: Request, res: Response) => {
   /*
     #swagger.tags = ['Quotes']
@@ -36,8 +70,8 @@ app.get('/quotes/random/inspirational', (req: Request, res: Response) => {
     #swagger.description = 'Returns a random quote from any character in the show as an inspirational 400x400 png image.'
     #swagger.produces = ['image/png']
   */
-  const quote = quotes[Math.floor(Math.random() * quotes.length)];
-  const img: Buffer = generateQuoteImage(quote);
+  const quote: Quote = quotes[Math.floor(Math.random() * quotes.length)];
+  const img: Buffer = getQuoteImage(req, quote);
 
   res.contentType('image/png');
   res.send(img);
@@ -51,7 +85,8 @@ app.get('/quotes/:id', (req: Request, res: Response) => {
     #swagger.parameters['id'] = {
         in: 'path',
         description: 'Quote ID',
-        required: true
+        required: true,
+        type: 'integer'
     }
   */
   const { id } = req.params;
@@ -83,7 +118,8 @@ app.get('/quotes/:id/inspirational', (req: Request, res: Response) => {
     res.status(404).json({ message: `No quote found with id: ${id}.` });
     return;
   }
-  const img: Buffer = generateQuoteImage(quote);
+
+  const img: Buffer = getQuoteImage(req, quote);
   res.contentType('image/png');
   res.send(img);
 });
