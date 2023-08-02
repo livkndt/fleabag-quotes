@@ -84,6 +84,9 @@ $ heroku config:set NPM_CONFIG_PRODUCTION=false --app your-app-name
 $ git push heroku main
 ```
 
+The "Automatic deploys" feature of Heroku is used; Heroku is connected via Github, and automatically deploys the app
+when changes are pushed to the main branch & the CI has run successfully.
+
 ### Installation
 
 You'll need Node.js and npm installed on your computer to run this application; follow instructions for your own OS.
