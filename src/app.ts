@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from 'express';
 import { Quote, getQuotes, quotes } from './quotes';
-import { generateQuoteImage } from './imageGenerator';
+import { QuoteImage } from './QuoteImage/QuoteImage';
 
 const app: Express = express();
 
@@ -39,7 +39,8 @@ const getQuoteImage = (req: Request, quote: Quote): Buffer => {
     ? Math.min(Number(req.query.fontSize), 96)
     : 24;
 
-  return generateQuoteImage(quote, imageWidth, imageHeight, fontSize);
+  const quoteImage = new QuoteImage(quote, imageWidth, imageHeight, fontSize);
+  return quoteImage.buffer;
 };
 
 app.get('/quotes/random', (req: Request, res: Response) => {
