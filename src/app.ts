@@ -136,7 +136,7 @@ app.get('/quotes/characters/:character', (req: Request, res: Response) => {
     }
   */
   const { character } = req.params;
-  const quotesByCharacter: string[] = getQuotes(character);
+  const quotesByCharacter: Quote[] = getQuotes(character);
 
   if (quotesByCharacter.length === 0) {
     characterNotFound(character, res);
@@ -162,7 +162,7 @@ app.get(
       }
     */
     const { character } = req.params;
-    const quotesByCharacter: string[] = getQuotes(character);
+    const quotesByCharacter: Quote[] = getQuotes(character);
 
     if (quotesByCharacter.length === 0) {
       characterNotFound(character, res);

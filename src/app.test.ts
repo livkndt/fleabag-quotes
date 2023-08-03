@@ -1,6 +1,6 @@
 import request from 'supertest';
 import app from './app';
-import { quotes } from './quotes';
+import { Quote, quotes } from './quotes';
 
 describe('GET /quotes/:id', () => {
   it('should respond with a quote given a quote id', async () => {
@@ -62,7 +62,9 @@ describe('GET /quotes/characters/:character', () => {
     const response = await request(app).get('/quotes/characters/Fleabag');
     expect(response.status).toBe(200);
     expect(response.body).toHaveLength(21);
-    expect(response.body).toContain('Hair is everything.');
+    expect(response.body.map((quote: Quote) => quote.quote)).toContain(
+      'Hair is everything.',
+    );
   });
   it('should respond with a 404 NotFound if character is not found', async () => {
     const response = await request(app).get('/quotes/characters/NotACharacter');
@@ -76,7 +78,11 @@ describe('GET /quotes/characters/:character/random', () => {
     const response = await request(app).get(
       '/quotes/characters/Fleabag/random',
     );
-    expect(quotes.some((quote) => quote.quote === response.body)).toBe(true);
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty('quote');
+    expect(
+      quotes.some((quote: Quote) => quote.quote === response.body.quote),
+    ).toBe(true);
   });
   it('should respond with a 404 NotFound if character is not found', async () => {
     const response = await request(app).get(

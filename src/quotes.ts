@@ -4,10 +4,8 @@ export type Quote = {
   character: string;
 };
 
-export const getQuotes = (character: string) => {
-  return quotes
-    .filter((quote: Quote) => quote.character === character)
-    .map((quote: Quote) => quote.quote);
+export const getQuotes = (character: string): Quote[] => {
+  return quotes.filter((quote: Quote) => quote.character === character);
 };
 
 export const quotes: Quote[] = [
