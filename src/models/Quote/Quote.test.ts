@@ -1,7 +1,7 @@
-import { getQuotes, Quote } from './quotes';
+import { getQuotes, Quote } from './Quote';
 
 describe('getQuotes', () => {
-  it('should return quotes by character', () => {
+  it('should return quote by character', () => {
     const result: Quote[] = getQuotes('Anthony');
     expect(result).toHaveLength(1);
     expect(result[0].quote).toBe(

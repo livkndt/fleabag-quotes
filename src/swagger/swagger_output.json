@@ -2,19 +2,29 @@
   "swagger": "2.0",
   "info": {
     "title": "Fleabag API",
-    "description": "Fleabag quotes API. Get random quotes from Phoebe Waller-Bridge's Fleabag.",
+    "description": "Fleabag quote API. Get random quote from Phoebe Waller-Bridge's Fleabag.",
     "version": "1.0.0"
   },
   "host": "localhost:3000",
   "basePath": "/",
-  "schemes": ["https", "http"],
-  "produces": ["application/json", "image/png"],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "produces": [
+    "application/json",
+    "image/png"
+  ],
   "paths": {
-    "/quotes/random": {
+    "/random": {
       "get": {
-        "tags": ["Quotes"],
+        "tags": [
+          "Quotes"
+        ],
         "description": "Get a random quote from the show.",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -25,11 +35,15 @@
         }
       }
     },
-    "/quotes/characters": {
+    "/characters": {
       "get": {
-        "tags": ["Quotes"],
-        "description": "Returns a list of all the characters who have quotes available.",
-        "produces": ["application/json"],
+        "tags": [
+          "Quotes"
+        ],
+        "description": "Returns a list of all the characters who have quote available.",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -37,11 +51,15 @@
         }
       }
     },
-    "/quotes/random/inspirational": {
+    "/random/inspirational": {
       "get": {
-        "tags": ["Quotes"],
+        "tags": [
+          "Images"
+        ],
         "description": "Returns a random quote from any character in the show as an inspirational 400x400 png image.",
-        "produces": ["image/png"],
+        "produces": [
+          "image/png"
+        ],
         "parameters": [
           {
             "name": "imageWidth",
@@ -72,17 +90,21 @@
         }
       }
     },
-    "/quotes/{id}": {
+    "/{id}": {
       "get": {
-        "tags": ["Quotes"],
+        "tags": [
+          "Quotes"
+        ],
         "description": "Returns a quote from the show by numeric quote id.",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string",
+            "type": "integer",
             "description": "Quote ID"
           }
         ],
@@ -99,11 +121,15 @@
         }
       }
     },
-    "/quotes/{id}/inspirational": {
+    "/{id}/inspirational": {
       "get": {
-        "tags": ["Quotes"],
+        "tags": [
+          "Quotes"
+        ],
         "description": "Returns a quote from the show by numeric quote id as an inspirational 400x400 png image.",
-        "produces": ["image/png"],
+        "produces": [
+          "image/png"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -144,11 +170,15 @@
         }
       }
     },
-    "/quotes/characters/{character}": {
+    "/characters/{character}": {
       "get": {
-        "tags": ["Quotes"],
-        "description": "Returns all the quotes from a specific character.",
-        "produces": ["application/json"],
+        "tags": [
+          "Quotes"
+        ],
+        "description": "Returns all the quote from a specific character.",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "character",
@@ -183,11 +213,15 @@
         }
       }
     },
-    "/quotes/characters/{character}/random": {
+    "/characters/{character}/random": {
       "get": {
-        "tags": ["Quotes"],
+        "tags": [
+          "Quotes"
+        ],
         "description": "Returns a random quote from a specific character.",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "character",

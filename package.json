@@ -16,10 +16,15 @@
     "lint": "eslint 'src/**/*.{ts,tsx}'",
     "prepare": "husky install",
     "format": "prettier --write .",
-    "swagger-autogen": "npm run build && node ./dist/swagger.js"
+    "swagger-autogen": "npm run build && node ./dist/swagger/swagger.js"
   },
   "engines": {
     "node": "18.x"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "echo \"[Husky] pre-commit\" npm run swagger-autogen && git add ./src/swagger_output.json"
+    }
   },
   "lint-staged": {
     "*.{js,ts,tsx,json,css,md}": "prettier --write"

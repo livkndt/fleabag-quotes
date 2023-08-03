@@ -1,8 +1,8 @@
 import request from 'supertest';
-import app from './app';
-import { Quote, quotes } from './quotes';
+import app from '../app';
+import { Quote, quotes } from '../models/Quote/Quote';
 
-describe('GET /quotes/:id', () => {
+describe('GET /quote/:id', () => {
   it('should respond with a quote given a quote id', async () => {
     const response = await request(app).get('/quotes/6');
     expect(response.status).toBe(200);
@@ -19,7 +19,7 @@ describe('GET /quotes/:id', () => {
   });
 });
 
-describe('GET /quotes/characters', () => {
+describe('GET /quote/characters', () => {
   it('should respond with a list of characters', async () => {
     const response = await request(app).get('/quotes/characters');
     expect(response.status).toBe(200);
@@ -39,7 +39,7 @@ describe('GET /quotes/characters', () => {
   });
 });
 
-describe('GET /quotes/random', () => {
+describe('GET /quote/random', () => {
   it('should respond with a random quote', async () => {
     const response = await request(app).get('/quotes/random');
 
@@ -57,8 +57,8 @@ describe('GET /quotes/random', () => {
   });
 });
 
-describe('GET /quotes/characters/:character', () => {
-  it('should respond with quotes for a specific character', async () => {
+describe('GET /quote/characters/:character', () => {
+  it('should respond with quote for a specific character', async () => {
     const response = await request(app).get('/quotes/characters/Fleabag');
     expect(response.status).toBe(200);
     expect(response.body).toHaveLength(21);
@@ -73,7 +73,7 @@ describe('GET /quotes/characters/:character', () => {
   });
 });
 
-describe('GET /quotes/characters/:character/random', () => {
+describe('GET /quote/characters/:character/random', () => {
   it('should respond with a random quote from a specific character', async () => {
     const response = await request(app).get(
       '/quotes/characters/Fleabag/random',
@@ -93,7 +93,7 @@ describe('GET /quotes/characters/:character/random', () => {
   });
 });
 
-describe('GET /quotes/random/inspirational', () => {
+describe('GET /quote/random/inspirational', () => {
   it('should respond with a random quote image', async () => {
     const response = await request(app).get('/quotes/random/inspirational');
     expect(response.statusCode).toBe(200);

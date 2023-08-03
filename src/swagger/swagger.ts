@@ -5,7 +5,7 @@ const doc = {
   info: {
     title: 'Fleabag API',
     description:
-      "Fleabag quotes API. Get random quotes from Phoebe Waller-Bridge's Fleabag.",
+      "Fleabag quote API. Get random quote from Phoebe Waller-Bridge's Fleabag.",
   },
   host: 'localhost:3000',
   schemes: ['https', 'http'],
@@ -19,7 +19,7 @@ const doc = {
   },
 };
 
-const outputFile = './src/swagger_output.json';
-const endpointsFiles = [path.join(__dirname, 'app.js')];
+const outputFile = './src/swagger/swagger_output.json';
+const endpointsFiles = [path.join(__dirname, '../routes/quotes.js')];
 
 swaggerAutogen()(outputFile, endpointsFiles, doc);

@@ -1,5 +1,5 @@
 import { QuoteImage } from './QuoteImage';
-import { Quote } from '../quotes';
+import { Quote } from '../Quote/Quote';
 
 describe('QuoteImage', () => {
   it('should create an instance of QuoteImage and have a buffer property', () => {
