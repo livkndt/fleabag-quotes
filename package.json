@@ -21,11 +21,6 @@
   "engines": {
     "node": "18.x"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "echo \"[Husky] pre-commit\" npm run swagger-autogen && git add ./src/swagger_output.json"
-    }
-  },
   "lint-staged": {
     "*.{js,ts,tsx,json,css,md}": "prettier --write"
   },

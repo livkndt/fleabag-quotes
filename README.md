@@ -2,7 +2,7 @@
 
 ![main branch](https://github.com/livkndt/fleabag-quotes/actions/workflows/nodejs.yml/badge.svg)
 
-💬 Fleabag quote API. Cheeky little REST API built on Node.js and Express using TypeScript.
+💬 Fleabag quotes API. Cheeky little REST API built on Node.js and Express using TypeScript.
 Designed to return random quote from the critically acclaimed TV series, "Fleabag", for your amusement.
 
 ## Demo
@@ -78,7 +78,7 @@ This app can be easily deployed to Heroku.
 
 ```shell
 $ heroku login
-$ cd fleabag-quote/
+$ cd fleabag-quotes/
 $ heroku create your-app-name
 $ heroku config:set NPM_CONFIG_PRODUCTION=false --app your-app-name
 $ git push heroku main
@@ -97,7 +97,7 @@ Clone the repository to your local machine.
 Navigate to the project folder and install dependencies using npm install.
 
 ```bash
-$ git clone https://github.com/livkndt/fleabag-quote.git
+$ git clone https://github.com/livkndt/fleabag-quotes.git
 $ npm install
 ```
 
@@ -115,7 +115,7 @@ You can run the application locally using the following command, using nodemon t
 
 ```bash
 $ npm run dev
-> fleabag-quote@1.0.0 dev
+> fleabag-quotes@1.0.0 dev
 > nodemon
 
 [nodemon] 3.0.1
