@@ -4,8 +4,7 @@ import swaggerAutogen from 'swagger-autogen';
 const doc = {
   info: {
     title: 'Fleabag API',
-    description:
-      "Fleabag quote API. Get random quote from Phoebe Waller-Bridge's Fleabag.",
+    description: "Fleabag quote API. Get random quote from Phoebe Waller-Bridge's Fleabag.",
   },
   host: 'localhost:3000',
   schemes: ['https', 'http'],
