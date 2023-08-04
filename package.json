@@ -22,7 +22,10 @@
     "node": "18.x"
   },
   "lint-staged": {
-    "*.{js,ts,tsx,json,css,md}": "prettier --write"
+    "*.{js,ts,tsx,json,css,md}": [
+      "prettier --write",
+      "npm run lint"
+    ]
   },
   "keywords": [
     "fleabag",
