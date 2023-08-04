@@ -1,14 +1,20 @@
-import express, { Request, Response } from 'express';
-import { getQuotes, Quote, quotes } from '../models/Quote/Quote';
-import { QuoteImage } from '../models/QuoteImage/QuoteImage';
+import express, { Request, Response, Router } from 'express';
+import Quote from '../models/Quote/Quote';
+import { getQuote, getQuotes, getQuoteImage } from '../services/QuoteService';
 
-const quotesRouter = express.Router();
+const quotesRouter: Router = express.Router();
+
+const quotes: Quote[] = getQuotes();
 
 const characterNotFound = (character: string, res: Response) => {
   res.status(404).json({ message: `No quotes found for "${character}".` });
 };
 
-const getQuoteImage = (req: Request, quote: Quote): Buffer => {
+const quoteNotFound = (id: string, res: Response) => {
+  res.status(404).json({ message: `No quote found with id: ${id}.` });
+};
+
+const quoteImage = (req: Request, quote: Quote): Buffer => {
   /*
     #swagger.parameters['imageWidth'] = {
         in: 'query',
@@ -29,18 +35,12 @@ const getQuoteImage = (req: Request, quote: Quote): Buffer => {
         type: 'integer'
     }
   */
-  const imageWidth: number = req.query.imageWidth
-    ? Math.min(Number(req.query.imageWidth), 2400)
-    : 400;
-  const imageHeight: number = req.query.imageHeight
-    ? Math.min(Number(req.query.imageHeight), 3000)
-    : 400;
-  const fontSize: number = req.query.fontSize
-    ? Math.min(Number(req.query.fontSize), 96)
-    : 24;
-
-  const quoteImage = new QuoteImage(quote, imageWidth, imageHeight, fontSize);
-  return quoteImage.buffer;
+  return getQuoteImage(
+    quote,
+    Number(req.query.imageWidth) || 400,
+    Number(req.query.imageHeight) || 400,
+    Number(req.query.fontSize) || 24,
+  );
 };
 
 quotesRouter.get('/random', (req: Request, res: Response) => {
@@ -59,9 +59,7 @@ quotesRouter.get('/characters', (req: Request, res: Response) => {
     #swagger.description = 'Returns a list of all the characters who have quote available.'
     #swagger.produces = ['application/json']
   */
-  const characters: string[] = Array.from(
-    new Set(quotes.map((quote: Quote) => quote.character)),
-  );
+  const characters: string[] = Array.from(new Set(quotes.map((quote: Quote) => quote.character)));
   res.json(characters);
 });
 
@@ -71,8 +69,7 @@ quotesRouter.get('/random/inspirational', (req: Request, res: Response) => {
     #swagger.description = 'Returns a random quote from any character in the show as an inspirational 400x400 png image.'
     #swagger.produces = ['image/png']
   */
-  const quote: Quote = quotes[Math.floor(Math.random() * quotes.length)];
-  const img: Buffer = getQuoteImage(req, quote);
+  const img: Buffer = quoteImage(req, quotes[Math.floor(Math.random() * quotes.length)]);
 
   res.contentType('image/png');
   res.send(img);
@@ -90,10 +87,9 @@ quotesRouter.get('/:id', (req: Request, res: Response) => {
         type: 'integer'
     }
   */
-  const { id } = req.params;
-  const quote = quotes.find((quote: Quote) => quote.id === Number(id));
+  const quote: Quote | undefined = getQuote(Number(req.params.id));
   if (!quote) {
-    res.status(404).json({ message: `No quote found with id: ${id}.` });
+    quoteNotFound(req.params.id, res);
     return;
   }
   /*
@@ -113,14 +109,13 @@ quotesRouter.get('/:id/inspirational', (req: Request, res: Response) => {
         required: true
     }
   */
-  const { id } = req.params;
-  const quote = quotes.find((quote: Quote) => quote.id === Number(id));
+  const quote: Quote | undefined = getQuote(Number(req.params.id));
   if (!quote) {
-    res.status(404).json({ message: `No quote found with id: ${id}.` });
+    quoteNotFound(req.params.id, res);
     return;
   }
 
-  const img: Buffer = getQuoteImage(req, quote);
+  const img: Buffer = quoteImage(req, quote);
   res.contentType('image/png');
   res.send(img);
 });
@@ -136,11 +131,9 @@ quotesRouter.get('/characters/:character', (req: Request, res: Response) => {
         required: true
     }
   */
-  const { character } = req.params;
-  const quotesByCharacter: Quote[] = getQuotes(character);
-
+  const quotesByCharacter: Quote[] = getQuotes(req.params.character);
   if (quotesByCharacter.length === 0) {
-    characterNotFound(character, res);
+    characterNotFound(req.params.character, res);
     return;
   }
   /*
@@ -149,10 +142,8 @@ quotesRouter.get('/characters/:character', (req: Request, res: Response) => {
   res.json(quotesByCharacter);
 });
 
-quotesRouter.get(
-  '/characters/:character/random',
-  (req: Request, res: Response) => {
-    /*
+quotesRouter.get('/characters/:character/random', (req: Request, res: Response) => {
+  /*
       #swagger.tags = ['Quotes']
       #swagger.description = 'Returns a random quote from a specific character.'
       #swagger.produces = ['application/json']
@@ -162,20 +153,15 @@ quotesRouter.get(
           required: true
       }
     */
-    const { character } = req.params;
-    const quotesByCharacter: Quote[] = getQuotes(character);
-
-    if (quotesByCharacter.length === 0) {
-      characterNotFound(character, res);
-      return;
-    }
-    /*
+  const quotesByCharacter: Quote[] = getQuotes(req.params.character);
+  if (quotesByCharacter.length === 0) {
+    characterNotFound(req.params.character, res);
+    return;
+  }
+  /*
       #swagger.responses[200] = { schema: { "$ref": "#/definitions/Quote" } }
     */
-    res.json(
-      quotesByCharacter[Math.floor(Math.random() * quotesByCharacter.length)],
-    );
-  },
-);
+  res.json(quotesByCharacter[Math.floor(Math.random() * quotesByCharacter.length)]);
+});
 
 export default quotesRouter;

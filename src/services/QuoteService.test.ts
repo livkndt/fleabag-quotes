@@ -1,4 +1,5 @@
-import { getQuotes, Quote } from './Quote';
+import Quote from '../models/Quote/Quote';
+import { getQuotes } from './QuoteService';
 
 describe('getQuotes', () => {
   it('should return quote by character', () => {

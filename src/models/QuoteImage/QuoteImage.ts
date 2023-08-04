@@ -1,10 +1,5 @@
-import { Quote } from '../Quote/Quote';
-import {
-  Canvas,
-  CanvasRenderingContext2D,
-  createCanvas,
-  registerFont,
-} from 'canvas';
+import Quote from '../Quote/Quote';
+import { Canvas, CanvasRenderingContext2D, createCanvas, registerFont } from 'canvas';
 import { getRandomHexCode } from '../../utils/utils';
 
 registerFont('./src/assets/LibreBaskerville-Regular.ttf', {
@@ -14,19 +9,14 @@ registerFont('./src/assets/LibreBaskerville-Italic.ttf', {
   family: 'LibreBaskervilleItalic',
 });
 
-export class QuoteImage {
+class QuoteImage {
   private _quote: Quote;
   private readonly _imageWidth: number;
   private readonly _imageHeight: number;
   private readonly _fontSize: number = 24;
   private readonly _buffer: Buffer;
 
-  constructor(
-    quote: Quote,
-    imageWidth: number,
-    imageHeight: number,
-    fontSize: number,
-  ) {
+  constructor(quote: Quote, imageWidth: number, imageHeight: number, fontSize: number) {
     this._quote = quote;
     this._imageWidth = imageWidth;
     this._imageHeight = imageHeight;
@@ -50,22 +40,12 @@ export class QuoteImage {
     this.drawRandomBackground(context, this._imageWidth, this._imageHeight);
 
     context.globalAlpha = 1;
-    this.drawCenteredQuote(
-      context,
-      fontColor,
-      this._quote,
-      quoteMaxWidth,
-      this._fontSize,
-    );
+    this.drawCenteredQuote(context, fontColor, this._quote, quoteMaxWidth, this._fontSize);
 
     return canvas.toBuffer();
   }
 
-  private drawRandomBackground(
-    context: CanvasRenderingContext2D,
-    canvasWidth: number,
-    canvasHeight: number,
-  ) {
+  private drawRandomBackground(context: CanvasRenderingContext2D, canvasWidth: number, canvasHeight: number) {
     // Create linear or radial gradient with randomised colours
     const today: Date = new Date();
     const seconds: number = today.getSeconds();
@@ -103,8 +83,7 @@ export class QuoteImage {
     context.fillStyle = fontColor;
 
     const quoteText: string = `"${quote.quote}"`;
-    const authorText: string =
-      quote.character == 'Fleabag' ? 'Fleabag' : `${quote.character} - Fleabag`;
+    const authorText: string = quote.character == 'Fleabag' ? 'Fleabag' : `${quote.character} - Fleabag`;
     const centerX: number = context.canvas.width / 2;
     const centerY: number = context.canvas.height / 2;
 
@@ -164,3 +143,5 @@ export class QuoteImage {
     drawLine(lines[lines.length - 1]);
   }
 }
+
+export default QuoteImage;

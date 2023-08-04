@@ -60,29 +60,6 @@
         "produces": [
           "image/png"
         ],
-        "parameters": [
-          {
-            "name": "imageWidth",
-            "in": "query",
-            "description": "Width of image in pixels (max 2400)",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "name": "imageHeight",
-            "in": "query",
-            "description": "Height of image in pixels (max 3000)",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "name": "fontSize",
-            "in": "query",
-            "description": "Font size of the quote text (max 96)",
-            "required": false,
-            "type": "integer"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -114,9 +91,6 @@
             "schema": {
               "$ref": "#/definitions/Quote"
             }
-          },
-          "404": {
-            "description": "Not Found"
           }
         }
       }
@@ -163,9 +137,6 @@
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
           }
         }
       }
@@ -206,9 +177,6 @@
                 "name": "main"
               }
             }
-          },
-          "404": {
-            "description": "Not Found"
           }
         }
       }
@@ -237,9 +205,6 @@
             "schema": {
               "$ref": "#/definitions/Quote"
             }
-          },
-          "404": {
-            "description": "Not Found"
           }
         }
       }
