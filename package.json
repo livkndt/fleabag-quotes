@@ -10,8 +10,8 @@
   "scripts": {
     "test": "jest",
     "start": "node dist/server.js",
-    "postinstall": "tsc",
-    "build": "tsc",
+    "postinstall": "tsc -p .",
+    "build": "tsc -p .",
     "dev": "nodemon",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
     "prepare": "husky install",
