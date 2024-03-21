@@ -9,9 +9,11 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "node dist/server.js",
+    "start": "ts-node src/server.ts",
+    "serve": "node dist/server.js",
     "postinstall": "tsc",
     "build": "tsc",
+    "postbuild": "chmod +x bin/postbuild.sh && ./bin/postbuild.sh",
     "dev": "nodemon",
     "lint": "eslint 'src/**/*.{ts,tsx}' --fix",
     "prepare": "husky install",
