@@ -13,7 +13,6 @@
     "serve": "node dist/server.js",
     "postinstall": "tsc",
     "build": "tsc",
-    "postbuild": "chmod +x bin/postbuild.sh && ./bin/postbuild.sh",
     "dev": "nodemon",
     "lint": "eslint 'src/**/*.{ts,tsx}' --fix",
     "prepare": "husky install",
