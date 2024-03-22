@@ -9,18 +9,18 @@ Designed to return random quote from the critically acclaimed TV series, "Fleaba
 
 ### Random quote
 
-http://ec2-54-227-156-37.compute-1.amazonaws.com/quotes/random
+https://fleabag-quotes.livkndt.com/quotes/random
 
 ### Random inspirational quote image
 
-<img src="http://ec2-54-227-156-37.compute-1.amazonaws.com/quotes/random/inspirational"
+<img src="https://fleabag-quotes.livkndt.com/quotes/random/inspirational"
 alt="inspirational quote" width="400" />
 
 ## API Usage
 
 The API includes several endpoints to interact with.
 
-You can see them all via the Swagger UI: http://ec2-54-227-156-37.compute-1.amazonaws.com/
+You can see them all via the Swagger UI: https://fleabag-quotes.livkndt.com/
 
 ## Development
 
@@ -134,7 +134,7 @@ As of writing, the Swagger API docs are generated manually using the following c
 $ npm run swagger-autogen
 ```
 
-Then, when the server is running, you can view the docs at: http://localhost:3000/api-docs/
+Then, when the server is running, you can view the docs at: http://localhost:3000/
 
 ```bash
 $ npm run dev
