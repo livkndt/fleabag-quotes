@@ -5,7 +5,7 @@
     "description": "Fleabag quote API. Get random quote from Phoebe Waller-Bridge's Fleabag.",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "fleabag-quotes.livkndt.com",
   "basePath": "/quotes",
   "schemes": [
     "https",
