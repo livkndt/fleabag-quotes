@@ -16,6 +16,7 @@ const doc = {
       quote: 'Hair is everything.',
     },
   },
+  basePath: '/quotes',
 };
 
 const outputFile = './src/swagger/swagger_output.json';

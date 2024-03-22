@@ -7,20 +7,20 @@ Designed to return random quote from the critically acclaimed TV series, "Fleaba
 
 ## Demo
 
-### API on Heroku
+### Random quote
 
-https://fleabag-quotes-6072411c0ec5.herokuapp.com/quotes/random
+http://ec2-54-227-156-37.compute-1.amazonaws.com/quotes/random
 
 ### Random inspirational quote image
 
-<img src="https://fleabag-quotes-6072411c0ec5.herokuapp.com/quotes/random/inspirational"
+<img src="http://ec2-54-227-156-37.compute-1.amazonaws.com/quotes/random/inspirational"
 alt="inspirational quote" width="400" />
 
 ## API Usage
 
 The API includes several endpoints to interact with.
 
-You can see them all via the Swagger UI: https://fleabag-quotes-6072411c0ec5.herokuapp.com/api-docs/
+You can see them all via the Swagger UI: http://ec2-54-227-156-37.compute-1.amazonaws.com/
 
 ## Development
 
@@ -84,7 +84,7 @@ $ heroku config:set NPM_CONFIG_PRODUCTION=false --app your-app-name
 $ git push heroku main
 ```
 
-The "Automatic deploys" feature of Heroku is used; Heroku is connected via Github, and automatically deploys the app
+The "Automatic deploys" feature of Heroku is used; Heroku is connected via GitHub, and automatically deploys the app
 when changes are pushed to the main branch & the CI has run successfully.
 
 ### Installation

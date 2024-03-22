@@ -16,7 +16,7 @@ app.use(limiter);
 
 app.use(helmet());
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);
