@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://github.com/livkndt/fleabag-quotes"
   },
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "jest",
     "start": "ts-node src/server.ts",
