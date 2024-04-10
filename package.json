@@ -21,7 +21,7 @@
     "swagger-autogen": "npm run build && node ./dist/swagger/swagger.js"
   },
   "engines": {
-    "node": "21.x"
+    "node": "20.x"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
