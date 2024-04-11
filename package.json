@@ -50,7 +50,6 @@
     "express": "^4.19.2",
     "express-rate-limit": "^7.1.5",
     "helmet": "^7.1.0",
-    "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0"
   },
   "devDependencies": {
@@ -60,7 +59,6 @@
     "@types/jest": "^29.5.12",
     "@types/node": "^20.11.30",
     "@types/supertest": "^6.0.2",
-    "@types/swagger-jsdoc": "^6.0.1",
     "@types/swagger-ui-express": "^4.1.6",
     "@typescript-eslint/eslint-plugin": "^7.6.0",
     "@typescript-eslint/parser": "^7.6.0",

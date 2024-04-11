@@ -20,7 +20,8 @@ app.use(helmet());
 
 app.use('/quotes', quotesRouter);
 
-app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+const CSS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css';
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument, { customCssUrl: CSS_URL }));
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);
