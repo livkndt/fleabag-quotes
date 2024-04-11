@@ -19,7 +19,7 @@ const limiter = (0, express_rate_limit_1.default)({
 app.use(limiter);
 app.use((0, helmet_1.default)());
 app.use('/quotes', quotes_1.default);
-const CSS_URL = "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
+const CSS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css';
 app.use('/', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_output_json_1.default, { customCssUrl: CSS_URL }));
 app.listen(port, () => {
     console.log(`Listening on port: ${port}`);

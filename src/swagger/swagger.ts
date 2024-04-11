@@ -7,7 +7,7 @@ const doc = {
     description: "Fleabag quote API. Get random quote from Phoebe Waller-Bridge's Fleabag.",
   },
   host: 'fleabag-quotes.livkndt.com',
-  schemes: ['https', 'http'],
+  schemes: ['https'],
   produces: ['application/json', 'image/png'],
   definitions: {
     Quote: {
