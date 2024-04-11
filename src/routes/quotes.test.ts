@@ -1,5 +1,5 @@
 import request from 'supertest';
-import app from '../app';
+import app from '../index';
 import Quote from '../models/Quote/Quote';
 import { getQuotes } from '../services/QuoteService';
 

@@ -122,7 +122,7 @@ $ npm run dev
 [nodemon] to restart at any time, enter `rs`
 [nodemon] watching path(s): src/**/*
 [nodemon] watching extensions: ts,js
-[nodemon] starting `ts-node ./src/server.ts`
+[nodemon] starting `ts-node ./src/index.ts`
 Listening on port: 3000
 ```
 

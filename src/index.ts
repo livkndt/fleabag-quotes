@@ -1,9 +1,11 @@
+import express, { Express } from 'express';
 import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from './swagger/swagger_output.json';
-import app from './app';
+import quotesRouter from './routes/quotes';
 
+const app: Express = express();
 const port: string | number = process.env.PORT || 3000;
 
 const limiter = rateLimit({
@@ -16,8 +18,12 @@ app.use(limiter);
 
 app.use(helmet());
 
+app.use('/quotes', quotesRouter);
+
 app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);
 });
+
+export default app;

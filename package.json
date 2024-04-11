@@ -7,18 +7,21 @@
     "type": "git",
     "url": "https://github.com/livkndt/fleabag-quotes"
   },
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "ts-node src/server.ts",
-    "serve": "node dist/server.js",
+    "start": "ts-node src/index.ts",
+    "serve": "node dist/index.js",
     "postinstall": "tsc",
-    "build": "tsc",
+    "build": "rimraf dist && tsc",
+    "add-build": "git add dist",
+    "ts-check": "tsc --project tsconfig.json",
     "dev": "nodemon",
     "lint": "eslint 'src/**/*.{ts,tsx}' --fix",
     "prepare": "husky install",
     "format": "prettier --write 'src/**/*.{ts,tsx}'",
-    "swagger-autogen": "npm run build && node ./dist/swagger/swagger.js"
+    "swagger-autogen": "npm run build && node ./dist/swagger/swagger.js",
+    "clean": "rimraf dist"
   },
   "engines": {
     "node": "20.x"
@@ -30,6 +33,11 @@
       "git add ."
     ]
   },
+  "pre-commit": [
+    "ts-check",
+    "build",
+    "add-build"
+  ],
   "keywords": [
     "fleabag",
     "quotes",
@@ -65,7 +73,9 @@
     "jest": "^29.7.0",
     "lint-staged": "^14.0.1",
     "nodemon": "^3.1.0",
+    "pre-commit": "^1.2.2",
     "prettier": "^3.0.3",
+    "rimraf": "^5.0.5",
     "supertest": "^6.3.4",
     "swagger-autogen": "^2.23.5",
     "ts-jest": "^29.1.1",
