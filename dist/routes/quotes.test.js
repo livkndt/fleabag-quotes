@@ -17,15 +17,6 @@ const index_1 = __importDefault(require("../index"));
 const QuoteService_1 = require("../services/QuoteService");
 const quotes = (0, QuoteService_1.getQuotes)();
 describe('GET /quote/:id', () => {
-    let server; // Explicitly define the type of 'server'
-    beforeAll(() => {
-        // Start the Express server and store the server instance
-        server = index_1.default.listen(3000); // Use the port your app listens on
-    });
-    afterAll((done) => {
-        // Stop the server after all tests are done
-        server.close(done);
-    });
     it('should respond with a quote given a quote id', () => __awaiter(void 0, void 0, void 0, function* () {
         const response = yield (0, supertest_1.default)(index_1.default).get('/quotes/6');
         expect(response.status).toBe(200);
