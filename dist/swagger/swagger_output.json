@@ -8,8 +8,7 @@
     "host": "fleabag-quotes.livkndt.com",
     "basePath": "/quotes",
     "schemes": [
-        "https",
-        "http"
+        "https"
     ],
     "produces": [
         "application/json",
