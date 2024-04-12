@@ -72,22 +72,7 @@ A note on some of the libraries used to ensure high-quality code:
 
 Tests are run on every push to the main branch using GitHub Actions.
 
-## Deployment
-
-This app can be easily deployed to Heroku.
-
-```shell
-$ heroku login
-$ cd fleabag-quotes/
-$ heroku create your-app-name
-$ heroku config:set NPM_CONFIG_PRODUCTION=false --app your-app-name
-$ git push heroku main
-```
-
-The "Automatic deploys" feature of Heroku is used; Heroku is connected via GitHub, and automatically deploys the app
-when changes are pushed to the main branch & the CI has run successfully.
-
-### Installation
+## Installation
 
 You'll need Node.js and npm installed on your computer to run this application; follow instructions for your own OS.
 
@@ -101,7 +86,7 @@ $ git clone https://github.com/livkndt/fleabag-quotes.git
 $ npm install
 ```
 
-### Test
+## Test
 
 Tests are written using Jest and Supertest. To run the tests:
 
@@ -109,7 +94,7 @@ Tests are written using Jest and Supertest. To run the tests:
 $ npm test
 ```
 
-### Run
+## Run
 
 You can run the application locally using the following command, using nodemon to watch for changes:
 
@@ -126,7 +111,7 @@ $ npm run dev
 Listening on port: 3000
 ```
 
-### Generating Swagger API docs
+## Generating Swagger API docs
 
 As of writing, the Swagger API docs are generated manually using the following command:
 
@@ -140,14 +125,65 @@ Then, when the server is running, you can view the docs at: http://localhost:300
 $ npm run dev
 ```
 
-### Build
+## Build
 
 This application is written in TypeScript, so it needs to be compiled to JavaScript before it can be run.
 
 Build the project by running `npm run build`. This will compile the TypeScript code into JavaScript in the dist folder.
 Start the server using npm start.
 
-### Contributing
+## Deployment
+
+### Heroku
+
+This app can be easily deployed to Heroku.
+
+```shell
+$ heroku login
+$ cd fleabag-quotes/
+$ heroku create your-app-name
+$ heroku config:set NPM_CONFIG_PRODUCTION=false --app your-app-name
+$ git push heroku main
+```
+
+The "Automatic deploys" feature of Heroku is used; Heroku is connected via GitHub, and automatically deploys the app
+when changes are pushed to the main branch & the CI has run successfully.
+
+### Vercel
+
+This app is currently deployed using Vercel, and the repo contains relevant configuration to do so.
+
+I had a real struggle getting a node/ts/express app deployed on Vercel, the current configuration works for now but may
+not be optimal. There are a few key things to note:
+
+- `vercel.json` contains the configuration for the Vercel deployment.
+- I would not normally commit my build files (under `/dist`) to git, however Vercel requires compiled JS to work, I
+  thought Vercel did this as part of the build process however I
+  couldn't find a working configuration for the life of me otherwise). I got this tip from
+  a [dev.to](https://dev.to/tirthpatel/deploy-node-ts-express-typescript-on-vercel-284h) article.
+- Vercel also seems to rely on having an `index.js` file. I used to have a `server.js` as the starting point for the
+  app, so I had to rename it to get it working.
+- For this reason, I am using a pre-commit hook to compile the TypeScript code before committing, to ensure that the
+  build files are always up-to-date:
+    ```json
+      // package.json
+      "pre-commit": [
+        "ts-check",
+        "build",
+        "add-build"
+      ],
+    ```
+- I also ran into an issue with the swagger UI. I ultimately found that I needed to downgrade my version
+  of `swagger-ui-express` to `4.3.0` - in newer versions the UI is totally broken.
+- In addition, I needed to grab the swagger UI CSS from the CDN and pass it to swagger using the `customCssUrl` option,
+  otherwise the styling is broken:
+  ```typescript
+    // app.ts
+    const CSS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css';
+    app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument, { customCssUrl: CSS_URL }));
+  ```
+
+## Contributing
 
 We welcome contributions! If you notice a bug 🐞, want to add a feature ✨, or think there's something that could be
 improved 🛠️, feel free to fork the repository and submit a pull request, or raise an issue 🤚.
