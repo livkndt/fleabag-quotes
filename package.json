@@ -33,11 +33,6 @@
       "git add ."
     ]
   },
-  "pre-commit": [
-    "ts-check",
-    "build",
-    "add-build"
-  ],
   "keywords": [
     "fleabag",
     "quotes",
