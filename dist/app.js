@@ -11,8 +11,8 @@ const swagger_output_json_1 = __importDefault(require("./swagger/swagger_output.
 const quotes_1 = __importDefault(require("./routes/quotes"));
 const app = (0, express_1.default)();
 const limiter = (0, express_rate_limit_1.default)({
-    windowMs: 15 * 60 * 1000,
-    max: 100,
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
     message: 'Too many requests from this IP, please try again later.',
 });
 app.use(limiter);

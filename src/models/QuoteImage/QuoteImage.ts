@@ -1,5 +1,5 @@
 import Quote from '../Quote/Quote';
-import { Canvas, CanvasRenderingContext2D, createCanvas, registerFont } from 'canvas';
+import { Canvas, CanvasRenderingContext2D, createCanvas, registerFont, TextMetrics } from 'canvas';
 import { getRandomHexCode } from '../../utils/utils';
 
 registerFont('./src/assets/LibreBaskerville-Regular.ttf', {
