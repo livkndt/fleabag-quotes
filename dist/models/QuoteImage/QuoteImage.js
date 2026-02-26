@@ -1,11 +1,15 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const path_1 = __importDefault(require("path"));
 const canvas_1 = require("canvas");
 const utils_1 = require("../../utils/utils");
-(0, canvas_1.registerFont)('./src/assets/LibreBaskerville-Regular.ttf', {
+(0, canvas_1.registerFont)(path_1.default.join(__dirname, '../../assets/LibreBaskerville-Regular.ttf'), {
     family: 'LibreBaskervilleRegular',
 });
-(0, canvas_1.registerFont)('./src/assets/LibreBaskerville-Italic.ttf', {
+(0, canvas_1.registerFont)(path_1.default.join(__dirname, '../../assets/LibreBaskerville-Italic.ttf'), {
     family: 'LibreBaskervilleItalic',
 });
 class QuoteImage {
