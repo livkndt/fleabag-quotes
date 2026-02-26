@@ -17,6 +17,7 @@
     "postinstall": "tsc",
     "ts-check": "tsc --project tsconfig.json",
     "lint": "eslint 'src/**/*.{ts,tsx}' --fix",
+    "lint:check": "eslint 'src/**/*.{ts,tsx}'",
     "prepare": "husky",
     "format": "prettier --write 'src/**/*.{ts,tsx}'",
     "swagger-autogen": "npm run build && node ./dist/swagger/swagger.js",
