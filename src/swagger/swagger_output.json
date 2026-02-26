@@ -15,6 +15,46 @@
     "image/png"
   ],
   "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Quotes"
+        ],
+        "description": "Returns all quotes, or filters by text search using the q query parameter.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Search term to filter quotes by text (case-insensitive)",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "array"
+                },
+                "items": {
+                  "$ref": "#/definitions/Quote"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
     "/random": {
       "get": {
         "tags": [

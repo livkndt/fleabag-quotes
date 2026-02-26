@@ -1,5 +1,5 @@
 import Quote from '../models/Quote/Quote';
-import { getQuotes } from './QuoteService';
+import { getQuotes, searchQuotes } from './QuoteService';
 
 describe('getQuotes', () => {
   it('should return quote by character', () => {
@@ -18,6 +18,23 @@ describe('getQuotes', () => {
   });
   it('should return empty array for non-existent character', () => {
     const result: Quote[] = getQuotes('NotACharacter');
+    expect(result).toHaveLength(0);
+  });
+});
+
+describe('searchQuotes', () => {
+  it('should return quotes matching the query', () => {
+    const result: Quote[] = searchQuotes('hair');
+    expect(result.length).toBeGreaterThan(0);
+    result.forEach((q) => expect(q.quote.toLowerCase()).toContain('hair'));
+  });
+  it('should search case-insensitively', () => {
+    const lower: Quote[] = searchQuotes('hair');
+    const upper: Quote[] = searchQuotes('HAIR');
+    expect(upper).toEqual(lower);
+  });
+  it('should return empty array for no matches', () => {
+    const result: Quote[] = searchQuotes('xyznotamatch12345');
     expect(result).toHaveLength(0);
   });
 });

@@ -36,6 +36,26 @@ const quoteImage = (req, quote) => {
     */
     return (0, QuoteService_1.getQuoteImage)(quote, Number(req.query.imageWidth) || 400, Number(req.query.imageHeight) || 400, Number(req.query.fontSize) || 24);
 };
+quotesRouter.get('/', (req, res) => {
+    /*
+      #swagger.tags = ['Quotes']
+      #swagger.description = 'Returns all quotes, or filters by text search using the q query parameter.'
+      #swagger.produces = ['application/json']
+      #swagger.parameters['q'] = {
+          in: 'query',
+          description: 'Search term to filter quotes by text (case-insensitive)',
+          required: false,
+          type: 'string'
+      }
+      #swagger.responses[200] = { schema: { type: 'array', items: { "$ref": "#/definitions/Quote" } } }
+    */
+    const q = req.query.q;
+    if (q) {
+        res.json((0, QuoteService_1.searchQuotes)(q));
+        return;
+    }
+    res.json(quotes);
+});
 quotesRouter.get('/random', (req, res) => {
     /*
       #swagger.tags = ['Quotes']
