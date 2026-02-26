@@ -11,7 +11,7 @@
   "scripts": {
     "test": "jest",
     "start": "ts-node src/index.ts",
-    "build": "rimraf dist && tsc",
+    "build": "rimraf dist && tsc && cp -r src/assets dist/assets",
     "serve": "node dist/index.js",
     "dev": "nodemon",
     "postinstall": "tsc",
