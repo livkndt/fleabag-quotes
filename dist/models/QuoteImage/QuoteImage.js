@@ -13,8 +13,12 @@ const utils_1 = require("../../utils/utils");
     family: 'LibreBaskervilleItalic',
 });
 class QuoteImage {
+    _quote;
+    _imageWidth;
+    _imageHeight;
+    _fontSize = 24;
+    _buffer;
     constructor(quote, imageWidth, imageHeight, fontSize) {
-        this._fontSize = 24;
         this._quote = quote;
         this._imageWidth = imageWidth;
         this._imageHeight = imageHeight;
