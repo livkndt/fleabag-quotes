@@ -26,8 +26,8 @@ You can see them all via the Swagger UI: https://fleabag-quotes.livkndt.com/
 
 ### Pre-requisites
 
-- Node (v18.x)
-- npm (v9.x)
+- Node (v24.x)
+- npm (v10.x)
 
 ## Libraries
 
