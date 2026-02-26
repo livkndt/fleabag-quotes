@@ -1,11 +1,12 @@
+import path from 'path';
 import Quote from '../Quote/Quote';
 import { Canvas, CanvasRenderingContext2D, createCanvas, registerFont, TextMetrics } from 'canvas';
 import { getRandomHexCode } from '../../utils/utils';
 
-registerFont('./src/assets/LibreBaskerville-Regular.ttf', {
+registerFont(path.join(__dirname, '../../assets/LibreBaskerville-Regular.ttf'), {
   family: 'LibreBaskervilleRegular',
 });
-registerFont('./src/assets/LibreBaskerville-Italic.ttf', {
+registerFont(path.join(__dirname, '../../assets/LibreBaskerville-Italic.ttf'), {
   family: 'LibreBaskervilleItalic',
 });
 
