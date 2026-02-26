@@ -8,7 +8,7 @@ const QuoteImage_1 = __importDefault(require("../models/QuoteImage/QuoteImage"))
 const QuoteRepository_1 = __importDefault(require("../data/QuoteRepository"));
 const getQuotes = (character = undefined) => {
     if (character) {
-        return QuoteRepository_1.default.filter((quote) => quote.character === character);
+        return QuoteRepository_1.default.filter((quote) => quote.character.toLowerCase() === character.toLowerCase());
     }
     return QuoteRepository_1.default;
 };
