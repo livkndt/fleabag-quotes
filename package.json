@@ -23,7 +23,7 @@
     "clean": "rimraf dist"
   },
   "engines": {
-    "node": "25.x"
+    "node": "24.x"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
