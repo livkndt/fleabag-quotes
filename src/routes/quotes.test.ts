@@ -5,6 +5,25 @@ import { getQuotes } from '../services/QuoteService';
 
 const quotes: Quote[] = getQuotes();
 
+describe('GET /quotes', () => {
+  it('should respond with all quotes', async () => {
+    const response = await request(app).get('/quotes');
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveLength(quotes.length);
+  });
+  it('should respond with matching quotes for a search query', async () => {
+    const response = await request(app).get('/quotes?q=hair');
+    expect(response.status).toBe(200);
+    expect(response.body.length).toBeGreaterThan(0);
+    response.body.forEach((q: Quote) => expect(q.quote.toLowerCase()).toContain('hair'));
+  });
+  it('should respond with empty array for a search query with no matches', async () => {
+    const response = await request(app).get('/quotes?q=xyznotamatch12345');
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveLength(0);
+  });
+});
+
 describe('GET /quote/:id', () => {
   it('should respond with a quote given a quote id', async () => {
     const response = await request(app).get('/quotes/6');
