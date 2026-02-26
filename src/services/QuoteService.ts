@@ -4,7 +4,7 @@ import quotes from '../data/QuoteRepository';
 
 export const getQuotes = (character: string | undefined = undefined): Quote[] => {
   if (character) {
-    return quotes.filter((quote: Quote) => quote.character === character);
+    return quotes.filter((quote: Quote) => quote.character.toLowerCase() === character.toLowerCase());
   }
   return quotes;
 };
