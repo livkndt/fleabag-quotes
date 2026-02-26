@@ -17,6 +17,7 @@
     "postinstall": "tsc",
     "ts-check": "tsc --project tsconfig.json",
     "lint": "eslint 'src/**/*.{ts,tsx}' --fix",
+    "lint:check": "eslint 'src/**/*.{ts,tsx}'",
     "prepare": "husky",
     "format": "prettier --write 'src/**/*.{ts,tsx}'",
     "swagger-autogen": "npm run build && node ./dist/swagger/swagger.js",
@@ -44,7 +45,7 @@
     "express": "^4.22.1",
     "express-rate-limit": "^7.5.1",
     "helmet": "^7.2.0",
-    "swagger-ui-express": "=4.3.0"
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",

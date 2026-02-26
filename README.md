@@ -173,10 +173,7 @@ not be optimal. There are a few key things to note:
         "add-build"
       ],
     ```
-- I also ran into an issue with the swagger UI. I ultimately found that I needed to downgrade my version
-  of `swagger-ui-express` to `4.3.0` - in newer versions the UI is totally broken.
-- In addition, I needed to grab the swagger UI CSS from the CDN and pass it to swagger using the `customCssUrl` option,
-  otherwise the styling is broken:
+- A custom CSS URL is passed to swagger to ensure correct styling on Vercel:
   ```typescript
     // app.ts
     const CSS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css';
