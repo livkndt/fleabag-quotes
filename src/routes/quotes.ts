@@ -1,6 +1,6 @@
 import express, { Request, Response, Router } from 'express';
 import Quote from '../models/Quote/Quote';
-import { getQuote, getQuotes, getQuoteImage, searchQuotes } from '../services/QuoteService';
+import { getQuote, getQuotes, getQuoteImage, getQuotesByCharacters } from '../services/QuoteService';
 
 const quotesRouter: Router = express.Router();
 
@@ -66,9 +66,21 @@ quotesRouter.get('/', (req: Request, res: Response) => {
         required: false,
         type: 'integer'
     }
+    #swagger.parameters['character'] = {
+        in: 'query',
+        description: 'Comma-separated character names to filter by (case-insensitive, OR logic)',
+        required: false,
+        type: 'string'
+    }
   */
   const q = req.query.q as string | undefined;
-  const results = q ? searchQuotes(q) : quotes;
+  const characterParam = req.query.character as string | undefined;
+
+  const characters = characterParam ? characterParam.split(',').map((c) => c.trim()) : undefined;
+  let results = characters ? getQuotesByCharacters(characters) : quotes;
+  if (q) {
+    results = results.filter((quote: Quote) => quote.quote.toLowerCase().includes(q.toLowerCase()));
+  }
 
   const limitParam = req.query.limit;
   const pageParam = req.query.page;

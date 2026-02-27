@@ -59,9 +59,20 @@ quotesRouter.get('/', (req, res) => {
           required: false,
           type: 'integer'
       }
+      #swagger.parameters['character'] = {
+          in: 'query',
+          description: 'Comma-separated character names to filter by (case-insensitive, OR logic)',
+          required: false,
+          type: 'string'
+      }
     */
     const q = req.query.q;
-    const results = q ? (0, QuoteService_1.searchQuotes)(q) : quotes;
+    const characterParam = req.query.character;
+    const characters = characterParam ? characterParam.split(',').map((c) => c.trim()) : undefined;
+    let results = characters ? (0, QuoteService_1.getQuotesByCharacters)(characters) : quotes;
+    if (q) {
+        results = results.filter((quote) => quote.quote.toLowerCase().includes(q.toLowerCase()));
+    }
     const limitParam = req.query.limit;
     const pageParam = req.query.page;
     if (limitParam !== undefined || pageParam !== undefined) {

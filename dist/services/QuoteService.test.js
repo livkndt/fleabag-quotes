@@ -33,4 +33,20 @@ describe('searchQuotes', () => {
         expect(result).toHaveLength(0);
     });
 });
+describe('getQuotesByCharacters', () => {
+    it('should return quotes for all specified characters', () => {
+        const result = (0, QuoteService_1.getQuotesByCharacters)(['Anthony', 'Boo']);
+        expect(result.length).toBeGreaterThan(0);
+        result.forEach((q) => expect(['Anthony', 'Boo']).toContain(q.character));
+    });
+    it('should filter case-insensitively', () => {
+        const lower = (0, QuoteService_1.getQuotesByCharacters)(['fleabag']);
+        const mixed = (0, QuoteService_1.getQuotesByCharacters)(['Fleabag']);
+        expect(lower).toEqual(mixed);
+    });
+    it('should return empty array when no characters match', () => {
+        const result = (0, QuoteService_1.getQuotesByCharacters)(['NotACharacter']);
+        expect(result).toHaveLength(0);
+    });
+});
 //# sourceMappingURL=QuoteService.test.js.map

@@ -52,6 +52,32 @@ describe('GET /quotes', () => {
         expect(response.body.data).toHaveLength(0);
         expect(response.body.total).toBe(quotes.length);
     });
+    it('should filter by a single character', async () => {
+        const response = await (0, supertest_1.default)(app_1.default).get('/quotes?character=Fleabag');
+        expect(response.status).toBe(200);
+        response.body.forEach((q) => expect(q.character).toBe('Fleabag'));
+    });
+    it('should filter by multiple characters with OR logic', async () => {
+        const response = await (0, supertest_1.default)(app_1.default).get('/quotes?character=Fleabag,Boo');
+        expect(response.status).toBe(200);
+        response.body.forEach((q) => expect(['Fleabag', 'Boo']).toContain(q.character));
+        const characters = new Set(response.body.map((q) => q.character));
+        expect(characters.has('Fleabag')).toBe(true);
+        expect(characters.has('Boo')).toBe(true);
+    });
+    it('should combine character filter with search', async () => {
+        const response = await (0, supertest_1.default)(app_1.default).get('/quotes?character=Fleabag&q=hair');
+        expect(response.status).toBe(200);
+        response.body.forEach((q) => {
+            expect(q.character).toBe('Fleabag');
+            expect(q.quote.toLowerCase()).toContain('hair');
+        });
+    });
+    it('should return empty array for a character filter with no matches', async () => {
+        const response = await (0, supertest_1.default)(app_1.default).get('/quotes?character=NotACharacter');
+        expect(response.status).toBe(200);
+        expect(response.body).toHaveLength(0);
+    });
 });
 describe('GET /quote/:id', () => {
     it('should respond with a quote given a quote id', async () => {
