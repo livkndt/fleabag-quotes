@@ -24,6 +24,34 @@ describe('GET /quotes', () => {
         expect(response.status).toBe(200);
         expect(response.body).toHaveLength(0);
     });
+    it('should respond with a paginated envelope when limit is provided', async () => {
+        const response = await (0, supertest_1.default)(app_1.default).get('/quotes?limit=5');
+        expect(response.status).toBe(200);
+        expect(response.body.data).toHaveLength(5);
+        expect(response.body.total).toBe(quotes.length);
+        expect(response.body.page).toBe(1);
+        expect(response.body.limit).toBe(5);
+        expect(response.body.totalPages).toBe(Math.ceil(quotes.length / 5));
+    });
+    it('should respond with the correct page of results', async () => {
+        const response = await (0, supertest_1.default)(app_1.default).get('/quotes?page=2&limit=5');
+        expect(response.status).toBe(200);
+        expect(response.body.data).toHaveLength(5);
+        expect(response.body.page).toBe(2);
+        expect(response.body.data[0]).toEqual(quotes[5]);
+    });
+    it('should combine search and pagination', async () => {
+        const response = await (0, supertest_1.default)(app_1.default).get('/quotes?q=hair&limit=1');
+        expect(response.status).toBe(200);
+        expect(response.body.data).toHaveLength(1);
+        expect(response.body.data[0].quote.toLowerCase()).toContain('hair');
+    });
+    it('should return empty data for an out-of-range page', async () => {
+        const response = await (0, supertest_1.default)(app_1.default).get('/quotes?page=1000&limit=10');
+        expect(response.status).toBe(200);
+        expect(response.body.data).toHaveLength(0);
+        expect(response.body.total).toBe(quotes.length);
+    });
 });
 describe('GET /quote/:id', () => {
     it('should respond with a quote given a quote id', async () => {

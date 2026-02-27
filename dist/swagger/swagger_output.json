@@ -20,7 +20,7 @@
                 "tags": [
                     "Quotes"
                 ],
-                "description": "Returns all quotes, or filters by text search using the q query parameter.",
+                "description": "Returns all quotes. Optionally filter by text search (q) and/or paginate (page, limit). Without pagination params, returns a flat array. With pagination params, returns an envelope with data and pagination metadata.",
                 "produces": [
                     "application/json"
                 ],
@@ -31,26 +31,25 @@
                         "description": "Search term to filter quotes by text (case-insensitive)",
                         "required": false,
                         "type": "string"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number (1-indexed, default: 1)",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Number of results per page",
+                        "required": false,
+                        "type": "integer"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "type": {
-                                    "type": "string",
-                                    "example": "array"
-                                },
-                                "items": {
-                                    "$ref": "#/definitions/Quote"
-                                }
-                            },
-                            "xml": {
-                                "name": "main"
-                            }
-                        }
+                        "description": "OK"
                     }
                 }
             }
