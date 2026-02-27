@@ -46,7 +46,7 @@ const quoteImage = (req: Request, quote: Quote): Buffer => {
 quotesRouter.get('/', (req: Request, res: Response) => {
   /*
     #swagger.tags = ['Quotes']
-    #swagger.description = 'Returns all quotes, or filters by text search using the q query parameter.'
+    #swagger.description = 'Returns all quotes. Optionally filter by text search (q) and/or paginate (page, limit). Without pagination params, returns a flat array. With pagination params, returns an envelope with data and pagination metadata.'
     #swagger.produces = ['application/json']
     #swagger.parameters['q'] = {
         in: 'query',
@@ -54,14 +54,36 @@ quotesRouter.get('/', (req: Request, res: Response) => {
         required: false,
         type: 'string'
     }
-    #swagger.responses[200] = { schema: { type: 'array', items: { "$ref": "#/definitions/Quote" } } }
+    #swagger.parameters['page'] = {
+        in: 'query',
+        description: 'Page number (1-indexed, default: 1)',
+        required: false,
+        type: 'integer'
+    }
+    #swagger.parameters['limit'] = {
+        in: 'query',
+        description: 'Number of results per page',
+        required: false,
+        type: 'integer'
+    }
   */
   const q = req.query.q as string | undefined;
-  if (q) {
-    res.json(searchQuotes(q));
+  const results = q ? searchQuotes(q) : quotes;
+
+  const limitParam = req.query.limit;
+  const pageParam = req.query.page;
+
+  if (limitParam !== undefined || pageParam !== undefined) {
+    const limit = Math.max(1, Number(limitParam) || 20);
+    const page = Math.max(1, Number(pageParam) || 1);
+    const total = results.length;
+    const totalPages = Math.ceil(total / limit);
+    const start = (page - 1) * limit;
+    res.json({ data: results.slice(start, start + limit), total, page, limit, totalPages });
     return;
   }
-  res.json(quotes);
+
+  res.json(results);
 });
 
 quotesRouter.get('/random', (req: Request, res: Response) => {
