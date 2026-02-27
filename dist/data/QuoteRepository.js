@@ -231,6 +231,116 @@ const quotes = [
         character: 'The Priest',
         quote: 'Why believe in something awful when you can believe in something wonderful?',
     },
+    {
+        id: 47,
+        character: 'The Priest',
+        quote: 'I love you.',
+    },
+    {
+        id: 48,
+        character: 'The Priest',
+        quote: "Don't.",
+    },
+    {
+        id: 49,
+        character: 'Fleabag',
+        quote: "It'll pass.",
+    },
+    {
+        id: 50,
+        character: 'Fleabag',
+        quote: 'I think I might be in love with a priest.',
+    },
+    {
+        id: 51,
+        character: 'Fleabag',
+        quote: "We have to be kind to each other. It's really all we've got.",
+    },
+    {
+        id: 52,
+        character: 'Claire',
+        quote: "I'm going to Helsinki.",
+    },
+    {
+        id: 53,
+        character: 'Claire',
+        quote: 'I use my anger as a fuel. Most women do.',
+    },
+    {
+        id: 54,
+        character: 'Godmother',
+        quote: 'You really do look ghastly, darling.',
+    },
+    {
+        id: 55,
+        character: 'Godmother',
+        quote: "I don't need to tell you that your father is a deeply sexual man.",
+    },
+    {
+        id: 56,
+        character: 'Boo',
+        quote: 'I just wanted him to feel something.',
+    },
+    {
+        id: 57,
+        character: 'Godmother',
+        quote: "I'll put her back on her shelf... it's funny. Out of all my pieces you chose her. She's based on your mum. So nice to have her back in the house.",
+    },
+    {
+        id: 58,
+        character: 'Fleabag',
+        quote: "Either she's got her period, or some serious shit has gone down.",
+    },
+    {
+        id: 59,
+        character: 'Fleabag',
+        quote: 'Do you still wank about me?',
+    },
+    {
+        id: 60,
+        character: 'Fleabag',
+        quote: "My sister. She's uptight and beautiful and probably anorexic, but clothes look awesome on her so...",
+    },
+    {
+        id: 61,
+        character: 'Fleabag',
+        quote: "I don't have rye bread, but I have some normal bread you can puke up later?",
+    },
+    {
+        id: 62,
+        character: 'Fleabag',
+        quote: 'I had to do a flash poo in Pret.',
+    },
+    {
+        id: 63,
+        character: 'Fleabag',
+        quote: 'Sting wore white jeans and a puppy got stuck in a fan. Big day.',
+    },
+    {
+        id: 64,
+        character: 'Fleabag',
+        quote: 'Evil boobs everywhere.',
+    },
+    {
+        id: 65,
+        character: 'Fleabag',
+        quote: "He's one of those men who is explosively sexually inappropriate with everyone but who makes you feel bad if you take offence.",
+    },
+    {
+        id: 66,
+        character: 'Fleabag',
+        quote: "Sometimes I wish I didn't even know that fucking existed.",
+    },
+    {
+        id: 67,
+        character: 'Fleabag',
+        quote: "She is not an evil stepmother, she's just a cunt!",
+    },
+    {
+        id: 68,
+        character: 'Fleabag',
+        quote: "Dad's way of coping with two motherless daughters was to buy us tickets to feminist lectures, start fucking our Godmother and eventually stop calling.",
+    },
 ];
 exports.default = quotes;
 //# sourceMappingURL=QuoteRepository.js.map
