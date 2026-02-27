@@ -85,6 +85,7 @@ describe('GET /quote/characters', () => {
       'Martin',
       'The Counsellor',
       'The Priest',
+      'Godmother',
     ]);
   });
 });
@@ -107,7 +108,7 @@ describe('GET /quote/characters/:character', () => {
   it('should respond with quote for a specific character', async () => {
     const response = await request(app).get('/quotes/characters/Fleabag');
     expect(response.status).toBe(200);
-    expect(response.body).toHaveLength(21);
+    expect(response.body).toHaveLength(35);
     expect(response.body.map((quote: Quote) => quote.quote)).toContain('Hair is everything.');
   });
   it('should respond with a 404 NotFound if character is not found', async () => {
