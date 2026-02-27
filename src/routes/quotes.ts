@@ -1,6 +1,6 @@
 import express, { Request, Response, Router } from 'express';
 import Quote from '../models/Quote/Quote';
-import { getQuote, getQuotes, getQuoteImage } from '../services/QuoteService';
+import { getQuote, getQuotes, getQuoteImage, searchQuotes } from '../services/QuoteService';
 
 const quotesRouter: Router = express.Router();
 
@@ -42,6 +42,27 @@ const quoteImage = (req: Request, quote: Quote): Buffer => {
     Number(req.query.fontSize) || 24,
   );
 };
+
+quotesRouter.get('/', (req: Request, res: Response) => {
+  /*
+    #swagger.tags = ['Quotes']
+    #swagger.description = 'Returns all quotes, or filters by text search using the q query parameter.'
+    #swagger.produces = ['application/json']
+    #swagger.parameters['q'] = {
+        in: 'query',
+        description: 'Search term to filter quotes by text (case-insensitive)',
+        required: false,
+        type: 'string'
+    }
+    #swagger.responses[200] = { schema: { type: 'array', items: { "$ref": "#/definitions/Quote" } } }
+  */
+  const q = req.query.q as string | undefined;
+  if (q) {
+    res.json(searchQuotes(q));
+    return;
+  }
+  res.json(quotes);
+});
 
 quotesRouter.get('/random', (req: Request, res: Response) => {
   /*

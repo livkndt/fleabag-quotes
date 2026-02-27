@@ -17,4 +17,20 @@ describe('getQuotes', () => {
         expect(result).toHaveLength(0);
     });
 });
+describe('searchQuotes', () => {
+    it('should return quotes matching the query', () => {
+        const result = (0, QuoteService_1.searchQuotes)('hair');
+        expect(result.length).toBeGreaterThan(0);
+        result.forEach((q) => expect(q.quote.toLowerCase()).toContain('hair'));
+    });
+    it('should search case-insensitively', () => {
+        const lower = (0, QuoteService_1.searchQuotes)('hair');
+        const upper = (0, QuoteService_1.searchQuotes)('HAIR');
+        expect(upper).toEqual(lower);
+    });
+    it('should return empty array for no matches', () => {
+        const result = (0, QuoteService_1.searchQuotes)('xyznotamatch12345');
+        expect(result).toHaveLength(0);
+    });
+});
 //# sourceMappingURL=QuoteService.test.js.map

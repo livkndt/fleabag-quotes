@@ -7,6 +7,24 @@ const supertest_1 = __importDefault(require("supertest"));
 const app_1 = __importDefault(require("../app"));
 const QuoteService_1 = require("../services/QuoteService");
 const quotes = (0, QuoteService_1.getQuotes)();
+describe('GET /quotes', () => {
+    it('should respond with all quotes', async () => {
+        const response = await (0, supertest_1.default)(app_1.default).get('/quotes');
+        expect(response.status).toBe(200);
+        expect(response.body).toHaveLength(quotes.length);
+    });
+    it('should respond with matching quotes for a search query', async () => {
+        const response = await (0, supertest_1.default)(app_1.default).get('/quotes?q=hair');
+        expect(response.status).toBe(200);
+        expect(response.body.length).toBeGreaterThan(0);
+        response.body.forEach((q) => expect(q.quote.toLowerCase()).toContain('hair'));
+    });
+    it('should respond with empty array for a search query with no matches', async () => {
+        const response = await (0, supertest_1.default)(app_1.default).get('/quotes?q=xyznotamatch12345');
+        expect(response.status).toBe(200);
+        expect(response.body).toHaveLength(0);
+    });
+});
 describe('GET /quote/:id', () => {
     it('should respond with a quote given a quote id', async () => {
         const response = await (0, supertest_1.default)(app_1.default).get('/quotes/6');
