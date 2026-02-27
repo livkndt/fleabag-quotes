@@ -45,6 +45,13 @@
                         "description": "Number of results per page",
                         "required": false,
                         "type": "integer"
+                    },
+                    {
+                        "name": "character",
+                        "in": "query",
+                        "description": "Comma-separated character names to filter by (case-insensitive, OR logic)",
+                        "required": false,
+                        "type": "string"
                     }
                 ],
                 "responses": {

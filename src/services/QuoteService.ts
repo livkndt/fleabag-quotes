@@ -14,6 +14,9 @@ export const getQuote = (id: number): Quote | undefined => quotes.find((quote: Q
 export const searchQuotes = (query: string): Quote[] =>
   quotes.filter((quote: Quote) => quote.quote.toLowerCase().includes(query.toLowerCase()));
 
+export const getQuotesByCharacters = (characters: string[]): Quote[] =>
+  quotes.filter((quote: Quote) => characters.some((c) => quote.character.toLowerCase() === c.toLowerCase()));
+
 export const getQuoteImage = (
   quote: Quote,
   requestWidth: number,
